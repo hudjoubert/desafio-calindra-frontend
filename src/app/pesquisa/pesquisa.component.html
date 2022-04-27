@@ -1,10 +1,16 @@
 <div class="container">
-  <div class="row">
-    <div class="col-9">
-
-    </div>
-    <div class="col-3">
-      <button type="button" class="btn btn-primary">Pesquisar</button>
+  <div class="d-flex justify-content-center">
+    <div class="row">
+      <div class="col-9">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Pesquise por um produto"
+        />
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-primary" (click)="getProdutos()">Pesquisar</button>
+      </div>
     </div>
   </div>
 </div>

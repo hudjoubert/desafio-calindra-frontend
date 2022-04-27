@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { PesquisarService } from '../pesquisar.service';
+import { Produto } from '../produto';
 
 @Component({
   selector: 'app-pesquisa',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PesquisaComponent implements OnInit {
 
-  constructor() { }
+  produtos: any[] = [];
+
+  constructor(private pesquisarService: PesquisarService) { }
 
   ngOnInit(): void {
+  }
+
+  getProdutos(): void {
+    this.pesquisarService.getProdutos().subscribe(produtos => {
+      this.produtos = produtos
+      console.log(produtos);
+
+    });
   }
 
 }
