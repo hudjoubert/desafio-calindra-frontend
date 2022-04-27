@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { PesquisarService } from '../pesquisar.service';
-import { Produto } from '../produto';
+import { PesquisarService } from '../produto/produto.service';
+import { Produto } from '../produto/produto';
 
 @Component({
   selector: 'app-pesquisa',
