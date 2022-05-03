@@ -1,24 +1,28 @@
-import { ProdutoDTO } from './produto-dto';
-import { Sugestao } from './sugestao';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map } from 'rxjs/operators';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { Produto } from './produto';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProdutoService {
+export class ProductService {
   private url = 'https://mystique-v2-americanas.juno.b2w.io';
 
-  private termoPesquisado = new BehaviorSubject<string>('');
-  termo = this.termoPesquisado.asObservable();
+  private termResearched = new BehaviorSubject<string>('');
+  term = this.termResearched.asObservable();
+
+  private alertMessage = new BehaviorSubject<string>('');
+  alert = this.alertMessage.asObservable();
 
   constructor(private http: HttpClient) {}
 
-  pesquisar(termo: string) {
-    this.termoPesquisado.next(termo);
+  sendAlert(alert: string) {
+    this.alertMessage.next(alert);
+  }
+
+  search(term: string) {
+    this.termResearched.next(term);
   }
 
   getProduto(): Observable<any> {
@@ -37,10 +41,10 @@ export class ProdutoService {
       .pipe(catchError(this.handleError<any>('getProdutos', [])));
   }
 
-  getSugestoes(): Observable<any> {
+  getSuggestions(): Observable<any> {
     return this.http
       .get(`${this.url}/autocomplete?content=camiseta&source=nanook`)
-      .pipe(catchError(this.handleError<any>('getSugestoes', [])));
+      .pipe(catchError(this.handleError<any>('getSuggestions', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {

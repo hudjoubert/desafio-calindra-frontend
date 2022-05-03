@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
-import { PesquisaComponent } from './pesquisa/pesquisa.component';
+import { SearchComponent } from './search/search.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ListaProdutoComponent } from './produto/lista-produto/lista-produto.component';
-import { FilterProductPipe } from './filter-product.pipe';
+import { ProductListComponent } from './product/product-list/product-list.component';
+import { FilterProductPipe } from './product/filter-product.pipe';
+import { AlertComponent } from './alert/alert.component';
+import { ContentComponent } from './template/content/content.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PesquisaComponent,
-    ListaProdutoComponent,
-    FilterProductPipe
+    SearchComponent,
+    ProductListComponent,
+    FilterProductPipe,
+    AlertComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let produto of produtos | filterProduct:termo; ">
+      <tr *ngFor="let produto of produtos | filterProduct:term; ">
         <th scope="row"> {{ produto.id  }}</th>
         <td>{{ produto.name }}</td>
         <td>{{ produto.type }}</td>
