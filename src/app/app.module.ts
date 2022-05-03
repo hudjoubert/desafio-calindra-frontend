@@ -5,12 +5,14 @@ import { AppComponent } from './app.component';
 import { PesquisaComponent } from './pesquisa/pesquisa.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ListaProdutoComponent } from './produto/lista-produto/lista-produto.component';
+import { FilterProductPipe } from './filter-product.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     PesquisaComponent,
-    ListaProdutoComponent
+    ListaProdutoComponent,
+    FilterProductPipe
   ],
   imports: [
     BrowserModule,

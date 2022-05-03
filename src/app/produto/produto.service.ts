@@ -1,28 +1,50 @@
+import { ProdutoDTO } from './produto-dto';
+import { Sugestao } from './sugestao';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, map, tap } from 'rxjs/operators';
-import { Observable, of } from 'rxjs';
+import { catchError, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { Produto } from './produto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
-export class PesquisarService {
+export class ProdutoService {
+  private url = 'https://mystique-v2-americanas.juno.b2w.io';
 
-  constructor(private http: HttpClient) { }
+  private termoPesquisado = new BehaviorSubject<string>('');
+  termo = this.termoPesquisado.asObservable();
 
-  private url = "https://mystique-v2-americanas.juno.b2w.io/autocomplete?content=camiseta&source=nanook";
+  constructor(private http: HttpClient) {}
 
-  getProdutos(): Observable<Produto[]> {
-    return this.http.get<Produto[]>(this.url)
-    .pipe(
-      catchError(this.handleError<Produto[]>('getProdutos', []))
-    );
+  pesquisar(termo: string) {
+    this.termoPesquisado.next(termo);
+  }
+
+  getProduto(): Observable<any> {
+    const observavel = this.http
+      .get(`${this.url}/autocomplete?content=camiseta&source=nanook`)
+      .pipe(
+        catchError(this.handleError<any>('getProduto', [])),
+        map(element => element.products)
+      );
+    return observavel;
+  }
+
+  getProdutos(): Observable<any> {
+    return this.http
+      .get(`${this.url}/autocomplete?content=camiseta&source=nanook`)
+      .pipe(catchError(this.handleError<any>('getProdutos', [])));
+  }
+
+  getSugestoes(): Observable<any> {
+    return this.http
+      .get(`${this.url}/autocomplete?content=camiseta&source=nanook`)
+      .pipe(catchError(this.handleError<any>('getSugestoes', [])));
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
 
